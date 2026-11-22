@@ -1,0 +1,37 @@
+cff-version: 1.2.0
+message: "Cite the dissertation for this work. The arXiv preprint is the public text of its spatial chapter."
+title: "Spatial soil moisture and evapotranspiration"
+authors:
+  - family-names: Puma
+    given-names: Michael J.
+preferred-citation:
+  type: thesis
+  title: "Space-time scaling properties of soil moisture and evapotranspiration in water-limited ecosystems"
+  authors:
+    - family-names: Puma
+      given-names: Michael Joseph
+  year: 2006
+  institution:
+    name: Princeton University
+    department: Civil and Environmental Engineering
+references:
+  - type: article
+    title: "Effects of spatial heterogeneity in rainfall and vegetation type on soil moisture and evapotranspiration"
+    authors:
+      - family-names: Puma
+        given-names: Michael J.
+      - family-names: Celia
+        given-names: Michael A.
+      - family-names: Rodriguez-Iturbe
+        given-names: Ignacio
+      - family-names: Nordbotten
+        given-names: Jan M.
+      - family-names: Guswa
+        given-names: Andrew J.
+      - family-names: Kavetski
+        given-names: Dmitri
+    year: 2016
+    identifiers:
+      - type: url
+        value: "https://arxiv.org/abs/1606.05256"
+        description: "arXiv preprint of the spatial chapter"
