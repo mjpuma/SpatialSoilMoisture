@@ -12,10 +12,6 @@ Cite the dissertation. It is the scholarly record, and this model is its last pa
 
 > Puma, M.J. (2006). *Space-time scaling properties of soil moisture and evapotranspiration in water-limited ecosystems.* Ph.D. dissertation, Department of Civil and Environmental Engineering, Princeton University. Advisers: Michael A. Celia and Ignacio Rodriguez-Iturbe.
 
-The dissertation has three parts: rainfall time resolution and the plant-scale water balance, soil moisture averaged over different depths, and this spatial problem. The first two were published as Puma et al. (2006), *Transport in Porous Media*, and Puma et al. (2005), *Advances in Water Resources*. The spatial part was not published in a journal. It was posted in 2016, without the revision that would have followed review, as [arXiv:1606.05256](https://arxiv.org/abs/1606.05256).
-
-Use the dissertation when the citation needs to be the work itself. Use the arXiv when a reader needs a paper they can download. Citing both is the right default: the dissertation for the research, the arXiv for the open text of the spatial chapter. The two are the same study. They are not a substitute for each other if a reader has to find the document.
-
 ## What the model does
 
 Depths in the Python code are millimeters and time is days. Parameters are the La Copita sandy loam, *Paspalum setaceum*, *Prosopis glandulosa*, and growing-season thunderstorms used in the dissertation.
