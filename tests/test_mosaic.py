@@ -1,4 +1,18 @@
-"""The uniform-rain, two-vegetation result in section 4.1."""
+"""Checks for the uniform-rain grass and woody mosaic.
+
+`test_effective_parameters_match_table_1` checks the averaged plant against
+the 50/50 column in the dissertation (root depth 700 mm, maximum
+evapotranspiration 4.59 mm/d).
+
+`test_leakage_occurs_below_mean_field_capacity` is the result that does not
+depend on a long rainfall series: grass at saturation 0.70 and woody at
+0.40 have a storage-weighted mean below field capacity, grass is leaking,
+and the effective column at that mean saturation is not.
+
+`test_pair_simulation_closes_and_leaks_below_field_capacity` runs 4000 days
+and checks the water balance, that this situation occurs, and that the
+mosaic leaks more than the effective column over the run.
+"""
 
 import numpy as np
 

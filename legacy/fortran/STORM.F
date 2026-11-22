@@ -2,10 +2,13 @@
         implicit none 
 !***********************************************************************
 !     Routine:  storm.f                                                 *
-!     Function: Generates storm arrival times.  That is, the time       *
-!               between storms and individual storm velocity.           *
-!     Written:  August 2004                                             *
-!     By:       M.J. Puma                                               *
+!     Function: Storm arrival days over [1, tmax].                       *
+!     Interarrival times are exponential with mean 1/stormlam (days).  *
+!     Each interarrival is rounded to the nearest integer day. A gap   *
+!     that rounds to 0 is drawn again, so two storms do not fall on    *
+!     the same day. nextstorm(j) is the day of storm j. numstorm is    *
+!     how many storms fall before tmax.                                 *
+!     Written:  August 2004, M.J. Puma                                  *
 !***********************************************************************  
       integer*4,parameter :: prec10 = selected_real_kind(10)
       integer*4,parameter :: ntdim = 35000

@@ -1,4 +1,15 @@
-"""Rainfall moments and the Boolean woody cover."""
+"""Checks for rainfall cells, woody cover, and spatial averages.
+
+`test_point_rainfall_matches_moment_equations` draws storms at one point.
+The mean depth should be within 1 mm of the theoretical storm depth, and
+the variance within 8 percent.
+
+`test_woody_cover_matches_boolean_model` checks that the cover formula
+gives 43.2 percent and that a sample of crowns is within 3 percent of it.
+
+`test_nested_means_follow_the_centered_windows` uses a 4 by 4 field whose
+means can be computed by hand.
+"""
 
 import numpy as np
 

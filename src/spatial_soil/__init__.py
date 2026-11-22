@@ -1,4 +1,17 @@
-"""Spatial soil-moisture bucket from Puma et al. (arXiv:1606.05256)."""
+"""Spatial soil moisture and evapotranspiration.
+
+The model is the last part of Puma, M.J. (2006), Ph.D. dissertation,
+Princeton University, and of the public text of that chapter,
+arXiv:1606.05256.
+
+Start with `simulate_pair` for the uniform-rain, grass-and-woody case,
+or with `daily_step` for one root zone. Depths are millimeters and time
+is days. `tests/` is the check that the drying solution, the rainfall
+moments, the woody cover, and the water balance are doing what the
+dissertation specifies. Run them from the repository root:
+
+    PYTHONPATH=src python -m pytest
+"""
 
 from .parameters import (
     GRASS,

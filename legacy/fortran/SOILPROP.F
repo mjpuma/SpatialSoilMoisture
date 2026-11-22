@@ -2,9 +2,17 @@
         implicit none
 !*********************************************************************
 !   Routine:  soilprop.f                                             *
-!   Purpose:  Input soil properties                                  *
-!   Written:  August 2004                                            *
-!   By:       M.J. Puma                                              *
+!   Purpose:  Read soil properties from flname (SOIL.IN).            *
+!   One number per line, in this order:                              *
+!     s_init   initial relative saturation, 0 to 1                    *
+!     s_zero   hygroscopic saturation Sh                             *
+!     s_fc     field capacity                                        *
+!     por      porosity, volume of voids per volume of soil          *
+!     Ksat     saturated conductivity, centimeters per day           *
+!     b        Clapp-Hornberger pore-size index                      *
+!   These match Table 3 of the dissertation chapter when centimeters *
+!   are converted to millimeters (82.2 cm/d = 822 mm/d).             *
+!   Written:  August 2004, M.J. Puma                                 *
 !*********************************************************************
       integer*4,parameter :: prec10 = selected_real_kind(10)
       

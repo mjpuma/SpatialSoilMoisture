@@ -4,7 +4,7 @@
 
 Daily soil moisture, evapotranspiration, and leakage when rainfall and vegetation vary in space. The land surface is a mosaic of grass and woody plants. Storms are collections of rain cells. Each plant has its own root zone, and the root zones do not exchange water.
 
-This is the spatial model from Michael J. Puma's Ph.D. dissertation and from the arXiv preprint of that chapter. The Python package follows the equations in that work. The Fortran program that ran the original experiments is in [`legacy/`](legacy/), with the 2004 source kept as it was found and a corrected `BUCKET2D.F` beside it.
+This is the spatial model from Michael J. Puma's Ph.D. dissertation and from the arXiv preprint of that chapter. The Python package follows that water balance. The Fortran program is in [`legacy/fortran/`](legacy/fortran/).
 
 ## Source
 
@@ -41,7 +41,7 @@ Python 3.10 or later, and numpy. The tests include a comparison of the analytica
 
 ## Legacy Fortran
 
-[`legacy/fortran/original/`](legacy/fortran/original/) is the August 2004 source as found, including the Silverfrost project file. [`legacy/fortran/BUCKET2D.F`](legacy/fortran/BUCKET2D.F) is that program with the errors corrected: woody crowns are type 2, each storm starts from an empty rainfall field, and spatial means use the row that belongs to the averaging window. Details are in [`legacy/README.md`](legacy/README.md). The input files are in centimeters.
+[`legacy/fortran/`](legacy/fortran/) is the spatial bucket. Build it with gfortran and run the 30-day check as described in [`legacy/fortran/README.md`](legacy/fortran/README.md). The input files are in centimeters. The Python package is the version to use for new work.
 
 ## Relation to tessera
 

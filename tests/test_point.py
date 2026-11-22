@@ -1,4 +1,15 @@
-"""Point-scale solution against the ODE and the water balance."""
+"""Checks for one root zone.
+
+`test_analytical_drying_matches_rk4` integrates the loss function
+independently and compares it with `dry`. A failure there means the
+closed-form drying solution has drifted from the equation.
+
+`test_daily_water_balance_with_rain_and_runoff` checks
+
+    storage change + ET + leakage + interception + runoff - rain = 0
+
+on a day that includes runoff. The residual must be a roundoff error.
+"""
 
 import numpy as np
 

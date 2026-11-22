@@ -1,4 +1,19 @@
-"""Poisson storms in time and Gaussian rain cells in space. Equations (4)–(7)."""
+"""Poisson storms in time and Gaussian rain cells in space.
+
+`daily_storm_depths(n_days, rng)` returns one depth per day in millimeters,
+for the uniform-rainfall case. A day is dry or holds one exponential storm.
+The mean storm depth is `mean_storm_depth()`, about 15.3 mm.
+
+`storm_on_point(n_storms, rng)` returns the depth at one place for storms
+made of Gaussian cells. The sample mean should fall near `mean_storm_depth()`
+and the sample variance near that mean times the mean cell-center depth
+(25.2 mm). `tests/test_rainfall_vegetation.py` is that check.
+
+`storm_field(x, y, rng)` builds one storm on a grid. `x` and `y` are
+1-D coordinates in meters. The returned array has shape `(len(y), len(x))`
+and units of millimeters. Cell centers are drawn past the edge of the grid
+so edge points are not systematically dry.
+"""
 
 from __future__ import annotations
 

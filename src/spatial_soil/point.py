@@ -1,10 +1,27 @@
-"""Point-scale water balance, equations (3) and (8)–(12).
+"""Point-scale water balance.
+
+Use `daily_step(s, rain_mm, column)` for one day. The column is a `Column`
+of soil and plant parameters, in millimeters and days. The call returns
+the saturation at the end of the day, the millimeters of evapotranspiration
+and leakage lost while the soil dried, the instantaneous rates at the
+start of the day, and the interception and runoff.
+
+The order inside the day is fixed, and it is the order in the dissertation.
+Record the rates from the saturation at the start of the day, dry for one
+day, then add rain. Interception is a depth threshold. Water above
+saturation is runoff.
+
+Check a result with the water balance, in millimeters:
+
+    porosity * Zr * (s_end - s_start) + ET + leakage + interception + runoff - rain
+
+That residual is a roundoff error when the step is right. `tests/test_point.py`
+also compares `dry` with a numerical integration of the same loss function.
+Passing that test is the check that the analytical drying solution is the
+equation that was intended.
 
 Between storms the soil dries by the analytical solution of Laio et al. (2001).
-A storm is an instantaneous pulse at the end of the day: interception first,
-then saturation-excess runoff. Evapotranspiration and leakage reported as
-"rates" are the instantaneous values at the start of the day. The integrated
-values are the millimeters lost during the day.
+Equations (3) and (8)–(12) of the spatial part of Puma (2006) and of arXiv:1606.05256.
 """
 
 from __future__ import annotations

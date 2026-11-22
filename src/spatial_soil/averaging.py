@@ -1,9 +1,16 @@
 """Spatial averages that keep the physical meaning of each variable.
 
-Evapotranspiration, leakage, and rainfall are depths per area, so they are
-area averages, equation (1). Relative saturation is water per void volume, so
-it is averaged with weights φ Zr A, equation (2). On a uniform grid with one
-soil, the weights reduce to root-zone depth.
+Evapotranspiration, leakage, and rainfall are depths per unit area, so use
+`area_mean`. Relative saturation is water per void volume, so use
+`saturation_mean(s, zr)`. On a uniform grid the weights are the root-zone
+depths. For one grass point at saturation 1 with Zr = 400 mm and one woody
+point at saturation 0 with Zr = 1000 mm, the mean is 400/1400.
+
+`nested_means(field)` returns the mean on square windows that grow from the
+center of a square field out to the whole field. The first value is the
+central window. The last value is the mean of the whole field. Pass `zr`
+as `weights` when the field is saturation and the root depth varies.
+`tests/test_rainfall_vegetation.py` checks both averages on a known field.
 """
 
 from __future__ import annotations

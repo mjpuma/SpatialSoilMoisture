@@ -1,4 +1,22 @@
-"""Daily simulations of one column, a two-type mosaic, and the effective-parameter column."""
+"""Daily simulations of one column, of a grass–woody pair, and of the effective column.
+
+`simulate_column(rain, column, s_init)` integrates one root zone.
+`rain` is a 1-D array of daily depths in millimeters. The function returns
+the series and the daily water-balance residual. A residual larger than
+about 1e-6 mm means the day did not conserve water.
+
+`simulate_pair(rain, s_init)` puts the same rain on grass and on the woody
+plant, and on a third column that uses the averaged parameters. The
+returned `s_mean` weights the two saturations by root-zone storage.
+`et_mean` and `leakage_mean` are area means of the millimeter totals.
+`leakage_rate_mean` is the area mean of the instantaneous leakage at the
+start of each day.
+
+The dissertation result to look for: some days have `leakage_rate_mean > 0`
+while `s_mean` is still below field capacity, and the mosaic leaks more
+over the run than the effective column. `examples/uniform_rain.py` prints
+that comparison. `tests/test_mosaic.py` asserts it.
+"""
 
 from __future__ import annotations
 

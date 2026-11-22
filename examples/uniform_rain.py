@@ -1,8 +1,17 @@
-"""Uniform rainfall on grass and woody columns, the case in section 4.1.
+"""Uniform rainfall on a grass column and a woody column.
 
 Run from the repository root:
 
     PYTHONPATH=src python examples/uniform_rain.py
+
+The run is 4000 days with the dissertation rainfall rate and the La Copita
+grass and woody parameters. The water-balance residual should print as
+about 1e-14 mm. Some days should leak while the storage-weighted mean
+saturation is still below field capacity. Over the whole run the two-plant
+mosaic should send a larger share of throughfall to leakage than the
+single effective column. A residual that is not a roundoff error, or a
+mosaic that leaks less than the effective column, means the comparison is
+not the one in the dissertation.
 """
 
 import numpy as np

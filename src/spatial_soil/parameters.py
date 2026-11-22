@@ -1,7 +1,17 @@
-"""La Copita parameters from Puma et al., arXiv:1606.05256, Tables 1–3.
+"""La Copita parameters, in millimeters and days.
 
-Depths are millimeters and time is days. Relative saturation is water volume
-per void volume.
+Import `SOIL`, `GRASS`, `WOODY`, and `RAIN` and pass them to `daily_step`
+or `simulate_pair`. Relative saturation is water volume per void volume.
+
+`effective_plant(0.5)` is the single column used when grass and woody
+plants each cover half the area. Its root depth is 700 mm and its maximum
+evapotranspiration is 4.59 mm/d, which is the check against Table 1 of
+the dissertation chapter. `mean_storm_depth()` is about 15.3 mm. The
+dissertation table rounds that to 15 mm.
+
+The Fortran input files store the same quantities in centimeters.
+`Zr = 40` there is 40 cm, which is `GRASS.zr` of 400 mm here.
+`Ksat = 82.2` cm/d there is `SOIL.ksat` of 822 mm/d here.
 """
 
 from __future__ import annotations
@@ -91,7 +101,7 @@ RAIN = RainParams(
     cell_scale=5000.0,
 )
 
-# Initial saturation used in the original input files. Not in the tables.
+# Initial saturation used in the Fortran input files. Not in the tables.
 S_INIT = 0.35
 
 # Equation (14) as printed in Table 4. c1 = 1830 mm/d with c2 = -2.830 mm/d

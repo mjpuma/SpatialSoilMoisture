@@ -2,13 +2,13 @@
         implicit none
 !*********************************************************************
 !   Routine:  locate.f                                               *
-!   Purpose:  Given an array xx(1:n) and given a value x, returns a  *
-!             value j such that x is between xx(j) and xx(j+1).      *
-!             xx(1:n) must be monotonic, either increasing or        *
-!             decreasing. j=0 or j=n is returned to indicate that    *
-!             x is out of range                                      *
-!   Written:  August 2004, M.J.Puma                                  *
-!   By:       Numerical Recipes in FORTRAN 2nd Edition               *                              *
+!   Purpose:  Given a monotonic array xx(1:n) and a value x, return  *
+!             j such that xx(j) <= x <= xx(j+1). j = 0 or j = n      *
+!             means x is outside the array. bucket2d uses this to    *
+!             find which sample point a woody-plant center falls     *
+!             nearest, then checks the crown radius in meters.       *
+!   Written:  August 2004, M.J. Puma. Algorithm from Numerical       *
+!             Recipes in FORTRAN, 2nd edition.                       *
 !********************************************************************* 
       integer*4,parameter :: prec10 = selected_real_kind(10)
       integer*4 j,n,jl,jm,ju

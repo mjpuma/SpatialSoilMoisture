@@ -2,9 +2,13 @@
         implicit none 
 !*********************************************************************
 !   Routine:  vegprop.f                                              *
-!   Purpose:  Input vegetation properties                            *
-!   Written:  August 2004                                            *
-!   By:       M.J. Puma                                              *
+!   Purpose:  Read grass, then woody, properties from VEGET.IN.      *
+!   Six numbers per plant, one per line:                             *
+!     s_wilt, s_star, Zr (cm), Emax (cm/d), Ewilt (cm/d),             *
+!     interception depth (cm).                                       *
+!   Index 1 is grass (Paspalum). Index 2 is woody (Prosopis).        *
+!   Zr = 40 cm is the 400 mm grass root depth in the dissertation.   *
+!   Written:  August 2004, M.J. Puma                                 *
 !*********************************************************************
       character*12 flname
       integer*4,parameter :: nutemp = 15       

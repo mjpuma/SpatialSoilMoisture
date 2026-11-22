@@ -6,9 +6,11 @@
         implicit none
 !*********************************************************************
 !   Routine:  input.f                                                *
-!   Purpose:  Input variables for grid and rainfall generator        *     
-!   Written:  August 2004                                            *
-!   By:       M.J. Puma                                              *
+!   Purpose:  Read BUCKET.IN, which names three files, one per line: *
+!     the control file, the soil file, and the vegetation file.     *
+!   Those names are at most 12 characters (control.in, soil.in,     *
+!   veget.in). The program reads them from the current directory.   *
+!   Written:  August 2004, M.J. Puma                                 *
 !*********************************************************************                    
       integer*4, parameter :: prec10 = selected_real_kind(10)
       

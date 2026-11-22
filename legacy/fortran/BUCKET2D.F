@@ -6,17 +6,36 @@
 !     Written:  August 2004                                            *
 !     By:       M.J. Puma                                              *
 !***********************************************************************
-!     Corrections, November 2026, relative to original/BUCKET2D.F:
-!       Woody cells are type 2. The 2004 line "1!2" commented out the 2,
-!       so every cell stayed grass.
-!       Each storm clears the rainfall field before cells are added.
-!       The 2004 source kept the previous storm, so consecutive storm
-!       days were counted twice.
-!       Nested spatial means use that window's first row. The 2004
-!       source read row 1 for every window except the full domain.
-!       The crown window on a south-edge tree matches the east-edge window.
-!       The wet fraction printed to the screen is the current day.
-!     The unmodified August 2004 source is in original/.
+!     What this program does
+!     ----------------------
+!     One grid block of a land-surface model. Each sample point is grass
+!     (type 1) or woody (type 2) and has its own root zone. Storms are a
+!     Poisson process in time. Each storm is a set of Gaussian rain cells.
+!     Between storms the root zone dries by the analytical solution of
+!     Laio et al. (2001). Rain is added at the end of the storm day, after
+!     interception. Saturation is held at 1; the excess is runoff.
+!
+!     How to run
+!     ----------
+!     From this directory, with gfortran:
+!         gfortran -std=legacy -O2 -o bucket2d *.F
+!     The La Copita inputs (CONTROL.IN, 30 km, 20200 days) are the
+!     dissertation experiment and need a long run. To check that the
+!     program works, use the short inputs:
+!         cd check && ../bucket2d
+!     See README.md in this directory for the file list, the units, and
+!     what to look for in the output. Depths in the input files are
+!     centimeters. The Python model in src/ uses millimeters.
+!
+!     Daily order, for every sample point
+!     ------------------------------------
+!     1. Record evapotranspiration and leakage from today's saturation.
+!        These are instantaneous rates, not the millimeter total for the
+!        day. et.out and leak.out are those rates, converted back to a
+!        depth per day (cm/d).
+!     2. Dry the soil for one day.
+!     3. On a storm day, add today's rainfall after subtracting canopy
+!        interception, and hold saturation at 1.
 !***********************************************************************
       integer*4,parameter :: prec10 = selected_real_kind(10)
        
@@ -254,6 +273,7 @@
                deltay = rgcory(k,1)-treey
                dist=sqrt(deltax**2+deltay**2)           
                if(dist.lt.canopy)then
+!                 Type 2 is the woody plant. Points start as grass (type 1).
                   iveggrid(i,k) = 2
                endif
             enddo
@@ -303,9 +323,7 @@
       enddo
            
 !   Compute the arrival times of storms
-      call storm(stormlam,numstorm,tmax,ideltat,nextstorm)  
-      write(*,6) (nextstorm(3))
-  6   format(1x,'m= ',i5)
+      call storm(stormlam,numstorm,tmax,ideltat,nextstorm)
 
 !*************************
 !     Begin Time Loop
@@ -348,7 +366,10 @@
                call expo(meanrain,actrain(p))  
             enddo              
 
-!         Clear yesterday's rain before accumulating this storm.
+!         Rainfall depth for this storm only, in centimeters.
+!         Each cell adds h * exp(-2 a^2 r^2). Cells are placed on a
+!         domain three times as wide as the grid, and the grid sits in
+!         the middle, so the edges are not systematically dry.
             do i=1,nxspar
                do j=1,nyspar
                   totrain(i,j) = 0.0
@@ -681,6 +702,10 @@
                new_nrg = 1
             endif      
                                              
+!           Means on the window [lowx:hix, lowy:hiy]. The window grows
+!           outward from the center. Saturation is weighted by porosity
+!           times root depth (a volume). Fluxes are an area mean.
+!           lowx is the first row of this window.
             do k=1,numavgblcks
                sumw_S = por*Zr(iveggrid(lowx,lowy))
                m_S = S(lowx,lowy)
@@ -845,7 +870,7 @@
 !    Write information to screen
          write(*,65) t,fracgras(numavgblcks),nextstorm(m),
      +    			xyavgsnew(numavgblcks),wetfrac
-  65     format(1x,'t= ',i5,', %grass= ',f10.4,'next t= ',i5,
+  65     format(1x,'t= ',i5,', %grass= ',f10.4,', next t= ',i5,
      +                ', <S>=',f10.4,',wetfrac=',f10.4)
   70     format(f15.10)   
 

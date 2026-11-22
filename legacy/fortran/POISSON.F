@@ -2,9 +2,13 @@
         implicit none
 !***********************************************************************
 !     Routine:  poisson.f                                              *
-!     Function: Generates poisson distributed random numbers           *
-!     Written:  August 2004                                            *
-!     By:       M.J. Puma                                              *
+!     Function: Poisson count with mean xnu.                            *
+!     nx is the count. Used for the number of woody plants in the      *
+!     grid block (mean treelam * area) and the number of rain cells    *
+!     in one storm (mean celllam * area of the extended domain).       *
+!     The count is the number of exponential waits that fit in [0, 1]  *
+!     when the wait has mean 1/xnu, which is a Poisson(xnu) draw.      *
+!     Written:  August 2004, M.J. Puma                                 *
 !***********************************************************************  
       integer,parameter :: prec10 = selected_real_kind(10)
         

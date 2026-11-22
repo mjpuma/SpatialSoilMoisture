@@ -1,8 +1,16 @@
-"""Grass matrix with woody crowns as a Boolean model of exponential disks.
+"""Woody crowns on a grass matrix.
 
-The paper places Prosopis centers as a Poisson process of intensity 0.04 m^-2
-and draws each crown radius from an exponential distribution with mean 1.5 m.
-A sample point is woody if it falls inside any crown.
+`woody_mask(x, y, rng)` returns a boolean array, True where a sample point
+lies inside a crown. `x` and `y` are 1-D coordinates in meters. Crowns are
+disks whose centers are a Poisson process and whose radii are exponential.
+The default intensity, 0.04 per m², and mean radius, 1.5 m, are the
+savanna in the dissertation. The cover fraction of that savanna is
+
+    woody_cover_probability(0.04, 1.5)
+
+which is 0.432. A large sample from `woody_mask` should come out near that
+value. `tests/test_rainfall_vegetation.py` is that check. The dissertation
+text reports 43.4 percent woody cover from a realization of the same model.
 """
 
 from __future__ import annotations

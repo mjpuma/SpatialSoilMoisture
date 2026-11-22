@@ -4,9 +4,19 @@
         implicit none
 !**********************************************************************
 !   Routine:  control.for                                             *
-!   Purpose:  To read control parameters for the spatial bucket model *
-!   Written:  August 2004                                             *
-!   By:       M.J. Puma                                               *
+!   Purpose:  Read CONTROL.IN. One value per line, in this order:     *
+!     dt            time step, days (the program steps once a day)    *
+!     tmax          last day                                          *
+!     ngridx,ngridy grid-block size, meters                           *
+!     nsubgridx,    spacing of the underlying 5 m plant grid, meters  *
+!     nsubgridy     The water balance is solved every 10th point.     *
+!     stormlam      storms per day                                    *
+!     celllam       rain cells per square meter                       *
+!     aa            1/a', with a' the rain-cell scale in meters       *
+!     meanrain      mean cell-center depth, centimeters               *
+!     treelam       woody plants per square meter                     *
+!     treerad       mean crown radius, meters                         *
+!   Written:  August 2004, M.J. Puma                                  *
 !**********************************************************************
       integer*4, parameter :: prec10 = selected_real_kind(10)                    
 
