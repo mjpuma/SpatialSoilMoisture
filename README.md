@@ -20,7 +20,7 @@ Depths in the Python code are millimeters and time is days. Parameters are the L
 - Uniform rain on grass and woody plants together, and the same rain on one column that uses averaged parameters. Saturation is weighted by root-zone storage. Fluxes are area averages.
 - Gaussian rain cells and woody crowns placed as a Boolean model of exponential disks.
 
-With the same rain on both plants, the shallow grass root zone can leak while the storage-weighted mean saturation is still below field capacity. A single effective column, given that mean saturation, does not leak. In a 4,000-day run this happens on 93 days. Leakage is 2.1% of throughfall for the mosaic and 0.6% for the effective column. The daily water balance closes to roundoff. Those figures are the uniform-rain case. The 90% / 8% / 1% split in the dissertation is the case with spatially variable rain, which is not rerun here.
+With the same rain on both plants, the shallow grass root zone can leak while the storage-weighted mean saturation is still below field capacity. A single effective column, given that mean saturation, does not leak. 
 
 ## Run
 
@@ -34,7 +34,3 @@ Python 3.10 or later, and numpy. The tests include a comparison of the analytica
 ## Legacy Fortran
 
 [`legacy/fortran/`](legacy/fortran/) is the spatial bucket. Build it with gfortran and run the 30-day check as described in [`legacy/fortran/README.md`](legacy/fortran/README.md). The input files are in centimeters. The Python package is the version to use for new work.
-
-## Relation to tessera
-
-[tessera](https://github.com/mjpuma/tessera) uses the same point-scale loss function, integrated numerically for one root zone shared by several crop varieties. Its rain is a daily marked Poisson process, correlated between farms by a Gaussian copula. This model builds the rain field from explicit cells, which is the construction tessera's documentation points to. Sampling a storm field from this model at farm locations would replace that copula when the question is whether the geometry of rain cells changes the mixture results. That coupling is not built.
