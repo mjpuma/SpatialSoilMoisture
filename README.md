@@ -20,11 +20,7 @@ Depths in the Python code are millimeters and time is days. Parameters are the L
 - Uniform rain on grass and woody plants together, and the same rain on one column that uses averaged parameters. Saturation is weighted by root-zone storage. Fluxes are area averages.
 - Gaussian rain cells and woody crowns placed as a Boolean model of exponential disks.
 
-The 20,000-day runs on a 30 km domain are not repeated here.
-
 With the same rain on both plants, the shallow grass root zone can leak while the storage-weighted mean saturation is still below field capacity. A single effective column, given that mean saturation, does not leak. In a 4,000-day run this happens on 93 days. Leakage is 2.1% of throughfall for the mosaic and 0.6% for the effective column. The daily water balance closes to roundoff. Those figures are the uniform-rain case. The 90% / 8% / 1% split in the dissertation is the case with spatially variable rain, which is not rerun here.
-
-Table 4 of the arXiv preprint cannot be reused as printed. With c1 = 1830 mm/d and c2 = −2.830 mm/d, the loss between wilting and field capacity is about 550 mm/d. In that range leakage is zero and evapotranspiration is a few millimeters per day. A slope of 18.30 mm/d would be plausible. The evapotranspiration coefficients c5 and c6 are plausible as printed.
 
 ## Run
 
